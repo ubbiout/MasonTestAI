@@ -76,7 +76,7 @@ public class Player {
                                 gc.blueprint(unit.id(), UnitType.Factory, Direction.South);
                             } catch (Exception e) { //M. end of try()
                                 //System.err.println("Exception caught: " + e.getMessage()); //gerald here
-                                e.printStackTrace();
+                                //e.printStackTrace();
                             }//M. end of catch()
                         //}
                     }
@@ -106,7 +106,7 @@ public class Player {
 
         } catch (Exception e) { //M. end of try()
             //System.err.println("Exception caught: " + e.getMessage()); //gerald here
-            e.printStackTrace();
+            //e.printStackTrace();
         }//M. end of catch()
 
 
