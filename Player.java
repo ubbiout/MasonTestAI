@@ -1,4 +1,4 @@
-//M. silent and closes game early  at turn 15, whatever is in the while loop on line 65 ....for debugging purposes
+//M. silent and closes game early  at turn <whatever is in the while loop on line 65> ....for debugging purposes
 // import the API.
 import bc.*;
 
@@ -62,7 +62,7 @@ public class Player {
             }
 
             //build a factory on round 9+
-            while (gc.round() > 8 && gc.round() < 15) { //M. just build factories forever lol... on the same square
+            while (gc.round() > 8 && gc.round() < 45) { //M. just build factories forever lol... on the same square
                 //System.out.println("Current round: " + gc.round() + " let's build a factory with " + gc.karbonite() + "karbonite in the bank");
                 VecUnit units = gc.myUnits();
                 for (int i = 0; i < units.size(); i++) { //M. all the workers/units will try to do the same thing
