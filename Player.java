@@ -12,6 +12,8 @@ public class Player {
         // One slightly weird thing: some methods are currently static methods on a static class called bc.
         // This will eventually be fixed :/
         //System.out.println("Opposite of " + Direction.East + ": " + bc.bcDirectionOpposite(Direction.East));
+        
+        int dieHere = 455;
 
         // Connect to the manager, starting the game
         GameController gc = new GameController();
@@ -22,21 +24,7 @@ public class Player {
         //M. trying not to break our server lol
         try {//M. just for testing purposes, the following code isn't smart and really only works on default map as blue
             
-            while (gc.round()%2 == 0) { //M. why can't this be an if statement?
-                System.out.println("Current round: " + gc.round() + " let's go West");
-                // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
-                VecUnit units = gc.myUnits();
-                for (int i = 0; i < units.size(); i++) {
-                    Unit unit = units.get(i);
-
-                    // Most methods on gc take unit IDs, instead of the unit objects themselves.
-                    if (gc.isMoveReady(unit.id()) && gc.canMove(unit.id(), Direction.West)) {
-                        gc.moveRobot(unit.id(), Direction.West);
-                    }
-                }
-                gc.nextTurn(); //M. this is all we will do on turn 1
-            }
-            while (gc.round()%2 == 1) { //M. why can't this be an if statement?
+            while (gc.round() < dieHere) { //M. why can't this be an if statement?
                 System.out.println("Current round: " + gc.round() + " let's go East");
                 // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
                 VecUnit units = gc.myUnits();
@@ -48,16 +36,16 @@ public class Player {
                         gc.moveRobot(unit.id(), Direction.East);
                     }
                 }
-                gc.nextTurn(); //M. this is all we will do on turn 1
+                gc.nextTurn(); //M. this is all we will do on this turn
             }
 
             System.out.println("Current round: " + gc.round() + " I got past everything!");
             // Submit the actions we've done, and wait for our next turn.
-            //gc.nextTurn(); //M. if we get to this point... end our turn. I don't know why this stops everything, but i don't want to crash server LOL OH GAWD
+            gc.nextTurn(); //M. if we get to this point... end our turn. I don't know why this stops everything, but i don't want to crash server LOL OH GAWD
 
         } catch (Exception e) { //M. end of try()
-            //System.err.println("Exception caught: " + e.getMessage()); //gerald here
-            //e.printStackTrace();
+            System.err.println("Exception caught: " + e.getMessage()); //gerald here
+            e.printStackTrace();
         }//M. end of catch()
 
 
