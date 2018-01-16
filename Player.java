@@ -6,14 +6,8 @@ public class Player {
     public static void main(String[] args) {
         // MapLocation is a data structure you'll use a lot.
         MapLocation loc = new MapLocation(Planet.Earth, 10, 20);
-        //System.out.println("loc: " + loc + ", one step to the Northwest: " + loc.add(Direction.Northwest));
-        //System.out.println("loc x: " + loc.getX());
-
-        // One slightly weird thing: some methods are currently static methods on a static class called bc.
-        // This will eventually be fixed :/
-        //System.out.println("Opposite of " + Direction.East + ": " + bc.bcDirectionOpposite(Direction.East));
         
-        int dieHere = 455;
+        int dieHere = 1000;
 
         // Connect to the manager, starting the game
         GameController gc = new GameController();
@@ -25,7 +19,8 @@ public class Player {
         try {//M. just for testing purposes, the following code isn't smart and really only works on default map as blue
             
             while (gc.round() < dieHere) { //M. why can't this be an if statement?
-                System.out.println("Current round: " + gc.round() + " let's go East");
+            try {
+                //System.out.println("Current round: " + gc.round() + " let's go East");
                 // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
                 VecUnit units = gc.myUnits();
                 for (int i = 0; i < units.size(); i++) {
@@ -37,11 +32,15 @@ public class Player {
                     }
                 }
                 gc.nextTurn(); //M. this is all we will do on this turn
+            } catch (Exception e) { //M. end of try()
+            System.err.println("Exception caught inside While-loop: " + e.getMessage()); //gerald here
+            e.printStackTrace();
+        }//M. end of catch()
             }
 
             System.out.println("Current round: " + gc.round() + " I got past everything!");
             // Submit the actions we've done, and wait for our next turn.
-            gc.nextTurn(); //M. if we get to this point... end our turn. I don't know why this stops everything, but i don't want to crash server LOL OH GAWD
+            //gc.nextTurn(); //M. if we get to this point... end our turn. I don't know why this stops everything, but i don't want to crash server LOL OH GAWD
 
         } catch (Exception e) { //M. end of try()
             System.err.println("Exception caught: " + e.getMessage()); //gerald here
